@@ -20,17 +20,12 @@ queue.add(new Pair<>(k,0));
 // Traversing the graph
 while(!queue.isEmpty()){
 
-    int qSize = queue.size();
+    Pair<Integer, Integer> curr = queue.remove();
 
-    for(int i=0;i<qSize;i++){
-        Pair<Integer, Integer> curr = queue.remove();
-
-        for(Pair<Integer, Integer> node : adjList.get(curr.getKey())){
-            if(dist[node.getKey()] > dist[curr.getKey()] + node.getValue() ){
-            dist[node.getKey()] =  dist[curr.getKey()] + node.getValue() ;
-            queue.add(node);
-            }
+    for(Pair<Integer, Integer> node : adjList.get(curr.getKey())){
+        if(dist[node.getKey()] > dist[curr.getKey()] + node.getValue() ){
+        dist[node.getKey()] =  dist[curr.getKey()] + node.getValue() ;
+        queue.add(node);
         }
-
     }
 }
