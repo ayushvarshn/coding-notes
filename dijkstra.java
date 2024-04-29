@@ -10,21 +10,21 @@ for(int i=0;i<=n;i++){
 for(int[] time : times)
     adjList.get(time[0]).add(new Pair<>(time[1], time[2]));
 
-PriorityQueue<Pair<Integer,Integer>> queue = new PriorityQueue<>( 
-    (a,b) -> a.getValue() -  b.getValue()
+PriorityQueue<Integer> queue = new PriorityQueue<>( 
+    (a,b) -> dist[a] -  dist[b]
 );
 
-dist[k] = 0;
-queue.add(new Pair<>(k,0));
+dist[start] = 0;
+queue.add(start);
 
 // Traversing the graph
 while(!queue.isEmpty()){
 
-    Pair<Integer, Integer> curr = queue.remove();
+    int curr = queue.remove();
 
-    for(Pair<Integer, Integer> node : adjList.get(curr.getKey())){
-        if(dist[node.getKey()] > dist[curr.getKey()] + node.getValue() ){
-        dist[node.getKey()] =  dist[curr.getKey()] + node.getValue() ;
+    for(Pair<Integer, Integer> node : adjList.get(curr)){
+        if(dist[node.getKey()] > dist[curr] + node.getValue() ){
+        dist[node.getKey()] =  dist[curr] + node.getValue() ;
         queue.add(node);
         }
     }
